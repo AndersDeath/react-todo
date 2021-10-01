@@ -1,29 +1,34 @@
 import React, { useState, KeyboardEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle, faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faSquare, faCheckSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { idGen } from '../../services/IdGen/IdGen';
 
 import './App.scss';
+
+const STATUS_TODO = 'status_todo';
+const STATUS_DONE = 'status_done';
+const STATUS_REMOVED = 'status_removed';
+
 interface IItem {
   key: number;
   title: string;
-  status: boolean;
+  status: string;
 }
 const defaultData: IItem[] = [
   {
     key: idGen.get(),
     title:'first',
-    status: false
+    status: STATUS_TODO
   },
   {
     key: idGen.get(),
     title:'second',
-    status: false
+    status: STATUS_TODO
   },
   {
     key: idGen.get(),
     title:'third ',
-    status: false
+    status: STATUS_TODO
   },   
 ]
 
@@ -44,7 +49,7 @@ function App() {
       let item:IItem[] = [...items,{
         key: idGen.get(),
         title: input,
-        status: false,
+        status: STATUS_TODO,
       }];
       setItem(item);
       setInput('')
@@ -53,10 +58,23 @@ function App() {
   function setStatus(key:number) {
     setItem(items.map((e) => {
       if(key === e.key) {
-        e.status = !e.status;
+        if(e.status === STATUS_TODO) {
+          e.status = STATUS_DONE;
+        } else if (e.status === STATUS_DONE) {
+          e.status = STATUS_TODO;
+        }
       }
       return e;
-    }))
+    }));
+  }
+
+  function remove(key: number) {
+    setItem(items.map((e) => {
+      if(key === e.key) {
+          e.status = STATUS_REMOVED;
+      }
+      return e;
+    }));
   }
 
   function onKeyDownHandler(event: KeyboardEvent) {
@@ -80,9 +98,13 @@ function App() {
          items.map((item: IItem) => {
           let style = 'list__item';
           let icon = faSquare;
-          if(item.status) {
+          if(item.status === STATUS_DONE) {
             style += ' done';
             icon = faCheckSquare;
+          }
+
+          if(item.status === STATUS_REMOVED) {
+            style += ' removed';
           }
           return <div className={style}  key={item.key} onClick={() => {
             setStatus(item.key);
@@ -91,6 +113,13 @@ function App() {
               <FontAwesomeIcon icon={icon} />
             </span>
             <span className="text">{item.title}</span>
+            <span className="icon-trash" onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              remove(item.key);
+            }}>
+              <FontAwesomeIcon icon={faTrash} />
+            </span>
             </div>
          })
         }

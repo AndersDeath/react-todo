@@ -44,6 +44,12 @@ body {
 
     flex-direction: column;
     width: 100%;
+    &__item:hover {
+      .icon-trash {
+        display: block;
+      }
+    }
+
     &__item {
       padding: 10px;
       background: #efefef;
@@ -55,8 +61,23 @@ body {
       .icon {
         color: #666;;
       }
+
+      .icon-trash {
+        float: right;
+        color: #666;
+        display: none;
+      }
+
       &.done {
         background: #cdcdcd;
+        .text {
+          text-decoration: line-through;
+        }
+
+      }
+
+      &.removed {
+        background: #ff3f3f;
         .text {
           text-decoration: line-through;
         }
