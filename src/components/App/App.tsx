@@ -22,7 +22,21 @@ const defaultData: IItem[] = [
     title: 'third ',
     status: STATUS_TODO
   },
-]
+];
+
+
+function updateStatus(items: IItem[], key: number) {
+  return items.map((e) => {
+    if (key === e.key) {
+      if (e.status === STATUS_TODO) {
+        e.status = STATUS_DONE;
+      } else if (e.status === STATUS_DONE) {
+        e.status = STATUS_TODO;
+      }
+    }
+    return e;
+  })
+}
 
 function App() {
 
@@ -40,16 +54,7 @@ function App() {
   }
 
   function setStatus(key: number) {
-    setItem(items.map((e) => {
-      if (key === e.key) {
-        if (e.status === STATUS_TODO) {
-          e.status = STATUS_DONE;
-        } else if (e.status === STATUS_DONE) {
-          e.status = STATUS_TODO;
-        }
-      }
-      return e;
-    }));
+    setItem(updateStatus(items, key));
   }
 
   function remove(key: number) {
