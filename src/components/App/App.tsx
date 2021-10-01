@@ -1,4 +1,7 @@
 import React, { useState, KeyboardEvent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+
 import './App.scss';
 
 interface IItem {
@@ -63,9 +66,12 @@ function App() {
   return (
     <div className="containter">
       <div className="input">
-        <input value={input} onKeyUp={onKeyDownHandler} onChange={inputOnChange} type="text" /><button onClick={() => {
+      <button onClick={() => {
           addItem(iterator);
-        }}>add</button>     
+        }}>
+          <FontAwesomeIcon icon={faCoffee} />
+          </button>  
+        <input value={input} onKeyUp={onKeyDownHandler} onChange={inputOnChange} type="search" />
       </div>
       <div className="list">
         {
