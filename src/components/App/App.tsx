@@ -1,6 +1,7 @@
 import React, { useState, KeyboardEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle, faSquare, faCheckSquare, faSquareRootAlt, faShareSquare, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+import { idGen } from '../../services/IdGen/IdGen';
 
 import './App.scss';
 interface IItem {
@@ -10,17 +11,17 @@ interface IItem {
 }
 const defaultData: IItem[] = [
   {
-    key: 0,
+    key: idGen.get(),
     title:'first',
     status: false
   },
   {
-    key: 1,
+    key: idGen.get(),
     title:'second',
     status: false
   },
   {
-    key: 2,
+    key: idGen.get(),
     title:'third ',
     status: false
   },   
@@ -31,7 +32,6 @@ const defaultData: IItem[] = [
 function App() {
 
   const [input, setInput] = useState<string>('')
-  const [iterator, setIterator] = useState<number>(3)
 
   const [items, setItem] = useState<IItem[]>([...defaultData]);
   
@@ -39,14 +39,13 @@ function App() {
     setInput(val.target.value);
   } 
   
-  function addItem(iterator: number){
+  function addItem(){
     if(input.trim().length > 0) {
       let item:IItem[] = [...items,{
-        key: iterator,
+        key: idGen.get(),
         title: input,
         status: false,
       }];
-      setIterator(++iterator);
       setItem(item);
       setInput('')
     }
@@ -62,7 +61,7 @@ function App() {
 
   function onKeyDownHandler(event: KeyboardEvent) {
     if(event.code === 'Enter') {
-      addItem(iterator);
+      addItem();
     }
   }
 
@@ -70,7 +69,7 @@ function App() {
     <div className="containter">
       <div className="input">
       <button onClick={() => {
-          addItem(iterator);
+          addItem();
         }}>
           <FontAwesomeIcon icon={faPlusCircle} />
       </button>  
@@ -80,14 +79,11 @@ function App() {
         {
          items.map((item: IItem) => {
           let style = 'list__item';
-          let styleDone = '';
           let icon = faSquare;
           if(item.status) {
             style += ' done';
             icon = faCheckSquare;
           }
-          
-
           return <div className={style}  key={item.key} onClick={() => {
             setStatus(item.key);
           }}>
