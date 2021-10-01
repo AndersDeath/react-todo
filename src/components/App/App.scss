@@ -26,7 +26,6 @@ body {
       font-size: 24px;
       padding: 6px;
       width: 90%;
-      margin-bottom: 30px;
     }
     button {
       width: 10%;
@@ -36,10 +35,13 @@ body {
       background-color: #508dff;
       border:none;
       color: #fff;
+      font-size: 24px;
     }
   }
 
   .list {
+    margin-top: 30px;
+
     flex-direction: column;
     width: 100%;
     &__item {
@@ -47,10 +49,17 @@ body {
       background: #efefef;
       border: 1px solid #dedede;
       cursor: pointer;
-
+      .text {
+        margin-left: 10px;
+      }
+      .icon {
+        color: #666;;
+      }
       &.done {
-        text-decoration: line-through;
         background: #cdcdcd;
+        .text {
+          text-decoration: line-through;
+        }
 
       }
       

@@ -1,37 +1,39 @@
 import React, { useState, KeyboardEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faSquare, faCheckSquare, faSquareRootAlt, faShareSquare, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 import './App.scss';
-
 interface IItem {
   key: number;
   title: string;
   status: boolean;
 }
+const defaultData: IItem[] = [
+  {
+    key: 0,
+    title:'first',
+    status: false
+  },
+  {
+    key: 1,
+    title:'second',
+    status: false
+  },
+  {
+    key: 2,
+    title:'third ',
+    status: false
+  },   
+]
+
+
 
 function App() {
 
   const [input, setInput] = useState<string>('')
   const [iterator, setIterator] = useState<number>(3)
 
-  const [items, setItem] = useState<IItem[]>([
-    {
-      key: 0,
-      title:'first',
-      status: false
-    },
-    {
-      key: 1,
-      title:'second',
-      status: false
-    },
-    {
-      key: 2,
-      title:'third ',
-      status: false
-    },   
-  ]);
+  const [items, setItem] = useState<IItem[]>([...defaultData]);
   
   function inputOnChange(val: React.ChangeEvent<HTMLInputElement>){
     setInput(val.target.value);
@@ -63,26 +65,37 @@ function App() {
       addItem(iterator);
     }
   }
+
   return (
     <div className="containter">
       <div className="input">
       <button onClick={() => {
           addItem(iterator);
         }}>
-          <FontAwesomeIcon icon={faCoffee} />
-          </button>  
+          <FontAwesomeIcon icon={faPlusCircle} />
+      </button>  
         <input value={input} onKeyUp={onKeyDownHandler} onChange={inputOnChange} type="search" />
       </div>
       <div className="list">
         {
          items.map((item: IItem) => {
           let style = 'list__item';
+          let styleDone = '';
+          let icon = faSquare;
           if(item.status) {
-            style += ' done'
+            style += ' done';
+            icon = faCheckSquare;
           }
+          
+
           return <div className={style}  key={item.key} onClick={() => {
             setStatus(item.key);
-          }}>{item.title}</div>
+          }}>
+            <span className="icon">
+              <FontAwesomeIcon icon={icon} />
+            </span>
+            <span className="text">{item.title}</span>
+            </div>
          })
         }
       </div>
