@@ -1,6 +1,7 @@
 import { faCheckSquare, faSquare, faTrash, faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IItem, STATUS_REMOVED } from "../../interfaces";
+import { ItemsListBtn } from "../ItemsListBtn/ItemsListBtn";
 
 export function ItemsList(props: any) {
 
@@ -25,20 +26,18 @@ export function ItemsList(props: any) {
             <FontAwesomeIcon icon={icon} />
           </span>
           <span className="text">{item.title}</span>
-          <span className="icon-trash" onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            props.removeHandler(item.key);
-          }}>
-            <FontAwesomeIcon icon={faTrash} />
-          </span>
-          <span className="icon-restore" onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            props.restoreHandler(item.key);
-          }}>
-            <FontAwesomeIcon icon={faTrashRestore} />
-          </span>
+          <ItemsListBtn
+            className="icon-trash"
+            handler={props.removeHandler}
+            itemKey={item.key}
+            fontAwesomIconLink={faTrash}
+          />
+          <ItemsListBtn
+            className="icon-restore"
+            handler={props.restoreHandler}
+            itemKey={item.key}
+            fontAwesomIconLink={faTrashRestore}
+          />
         </div>
       })
     }
