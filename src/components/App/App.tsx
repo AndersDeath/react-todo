@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquare, faCheckSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faSquare, faCheckSquare, faTrash, faTrashRestore } from '@fortawesome/free-solid-svg-icons'
 import { idGen } from '../../services/IdGen/IdGen';
 import { AddInput } from '../addInput/AddInput'
 import './App.scss';
-import { IItem, STATUS_DONE, STATUS_REMOVED, STATUS_TODO } from '../../interfaces';
+import { IItem, STATUS_DONE, STATUS_REMOVED, STATUS_RESTORED, STATUS_TODO } from '../../interfaces';
 
+let date = new Date();
 const defaultData: IItem[] = [
   {
     key: idGen.get(),
     title: 'first',
-    status: STATUS_TODO
+    status: STATUS_TODO,
+    done: false,
+    datetime: date.toISOString()
   },
   {
     key: idGen.get(),
     title: 'second',
-    status: STATUS_TODO
+    status: STATUS_TODO,
+    done: false,
+    datetime: date.toISOString()
   },
   {
     key: idGen.get(),
     title: 'third ',
-    status: STATUS_TODO
+    status: STATUS_TODO,
+    done: false,
+    datetime: date.toISOString()
   },
 ];
 
@@ -28,18 +35,14 @@ const defaultData: IItem[] = [
 function updateStatus(items: IItem[], key: number) {
   return items.map((e) => {
     if (key === e.key) {
-      if (e.status === STATUS_TODO) {
-        e.status = STATUS_DONE;
-      } else if (e.status === STATUS_DONE) {
-        e.status = STATUS_TODO;
-      }
+      e.done = !e.done;
     }
     return e;
   })
 }
 
 function App() {
-
+  let date = new Date();
   const [items, setItem] = useState<IItem[]>([...defaultData]);
 
   function addItem(input: string) {
@@ -48,6 +51,8 @@ function App() {
         key: idGen.get(),
         title: input,
         status: STATUS_TODO,
+        done: false,
+        datetime: date.toISOString()
       }];
       setItem(item);
     }
@@ -66,6 +71,15 @@ function App() {
     }));
   }
 
+  function restore(key: number) {
+    setItem(items.map((e) => {
+      if (key === e.key) {
+        e.status = STATUS_RESTORED;
+      }
+      return e;
+    }));
+  }
+
   return (
     <div className="containter">
       <AddInput addItem={(item: string) => {
@@ -76,16 +90,17 @@ function App() {
           items.map((item: IItem) => {
             let style = 'list__item';
             let icon = faSquare;
-            if (item.status === STATUS_DONE) {
+            if (item.done && item.status) {
               style += ' done';
               icon = faCheckSquare;
             }
-
             if (item.status === STATUS_REMOVED) {
               style += ' removed';
             }
             return <div className={style} key={item.key} onClick={() => {
-              setStatus(item.key);
+              if(item.status !== STATUS_REMOVED) {
+                setStatus(item.key);
+              }
             }}>
               <span className="icon">
                 <FontAwesomeIcon icon={icon} />
@@ -97,6 +112,13 @@ function App() {
                 remove(item.key);
               }}>
                 <FontAwesomeIcon icon={faTrash} />
+              </span>
+              <span className="icon-restore" onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                restore(item.key);
+              }}>
+                <FontAwesomeIcon icon={faTrashRestore} />
               </span>
             </div>
           })

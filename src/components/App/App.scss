@@ -62,7 +62,7 @@ body {
         color: #666;;
       }
 
-      .icon-trash {
+      .icon-trash, .icon-restore {
         float: right;
         color: #666;
         display: none;
@@ -78,10 +78,18 @@ body {
 
       &.removed {
         background: #ff3f3f;
+        .icon-trash {
+          display: none;
+        }
         .text {
           text-decoration: line-through;
         }
+      }
 
+      &.removed:hover {
+        .icon-restore {
+          display: block;
+        }
       }
       
     }
