@@ -19,7 +19,7 @@ export function ItemsList(props: any) {
         }
         return <div className={style} key={item.key} onClick={() => {
           if(item.status !== STATUS_REMOVED) {
-            props.toggleDoneHandler(item.key);
+            props.toggleDoneHandler(item);
           }
         }}>
           <span className="icon">
@@ -29,13 +29,13 @@ export function ItemsList(props: any) {
           <ItemsListBtn
             className="icon-trash"
             handler={props.removeHandler}
-            itemKey={item.key}
+            item={item}
             fontAwesomIconLink={faTrash}
           />
           <ItemsListBtn
             className="icon-restore"
             handler={props.restoreHandler}
-            itemKey={item.key}
+            item={item}
             fontAwesomIconLink={faTrashRestore}
           />
         </div>
