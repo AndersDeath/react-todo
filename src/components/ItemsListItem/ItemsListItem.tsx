@@ -42,12 +42,14 @@ export function ItemsListItem(props: any) {
 
     let style = 'list__item';
     let icon = faSquare;
+    let isDisabled = false
     if (props.item.done) {
       style += ' done';
       icon = faCheckSquare;
     }
     if (props.item.status === STATUS_REMOVED) {
       style += ' removed';
+      isDisabled = true;
     }
     return (<div className={style} key={props.item.key} >
       <span className="icon" onClick={() => {
@@ -57,7 +59,7 @@ export function ItemsListItem(props: any) {
     }}>
         <FontAwesomeIcon icon={icon} />
       </span>
-      <input type="text" className="text-input" value={input} onChange={inputOnChange}/>
+      <input disabled={isDisabled} type="text" className="text-input" value={input} onChange={inputOnChange}/>
       <div className="button-area">
         <ItemsListBtn
           className="icon-trash"
