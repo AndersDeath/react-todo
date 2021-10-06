@@ -15,6 +15,24 @@ body {
   border: 1px solid #535353;
   background-color: rgba(0,0,0,0.7);
   width: 60%;
+
+
+  .icon {
+    color: #666;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  .icon-close {
+    float: right;
+    position: relative;
+    font-size: 24px;
+    margin: -18px;
+    color: #333;
+    border-radius: 32px;
+    
+  }
+
   .input {
     flex-direction: row;
     width: 100%;

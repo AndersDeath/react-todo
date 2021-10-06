@@ -5,6 +5,7 @@ import { IItem, ItemState, STATUS_REMOVED } from '../../interfaces';
 import { ItemsList } from '../ItemsList/ItemsList';
 import { useSelector } from 'react-redux';
 import { ItemInfoPopup } from '../ItemInfoPopup/ItemInfoPopup';
+import { idGen } from '../../services/IdGen/IdGen';
 
 function App() {
 
@@ -21,6 +22,8 @@ function App() {
       removedItems.push(item);
     }
   });
+  let date = new Date();
+
   return (
     <div className="containter">
       <AddInput />
@@ -30,7 +33,15 @@ function App() {
       <ItemsList
         items={removedItems}
       />
-      <ItemInfoPopup />
+      {/* <ItemInfoPopup show={true} item={
+        {
+          key: idGen.get(),
+          title: 'first',
+          status: '',
+          done: false,
+          datetime: date.toISOString()
+        }
+      }/> */}
     </div>
   );
 }
