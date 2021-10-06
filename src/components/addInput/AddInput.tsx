@@ -1,8 +1,12 @@
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { KeyboardEvent, useState } from "react";
+import React, { Dispatch, KeyboardEvent, useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
+import { createItem } from "../../entities/Item";
+import { IItem } from "../../interfaces";
+import { addItemAction } from "../../store/actionCreators";
 
-export function AddInput(props: any) {
+export function AddInput() {
     const [input, setInput] = useState<string>('')
 
     function inputOnChange(val: React.ChangeEvent<HTMLInputElement>) {
@@ -11,14 +15,21 @@ export function AddInput(props: any) {
 
     function onKeyDownHandler(event: KeyboardEvent) {
         if (event.code === 'Enter') {
-            props.addItem(input);
+            addItem(createItem(input));
             setInput('')
         }
     }
 
+    const dispatch: Dispatch<any> = useDispatch()
+
+    const addItem = useCallback(
+      (item: IItem) => dispatch(addItemAction(item)),
+      [dispatch]
+    )
+
     return <div className="input">
         <button onClick={() => {
-            props.addItem(input);
+            addItem(createItem(input));
             setInput('')
         }}>
             <FontAwesomeIcon icon={faPlusCircle} />
