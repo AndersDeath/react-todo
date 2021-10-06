@@ -68,7 +68,7 @@ body {
       }
 
       .button-area {
-        width: 30px;
+        width: 50px;
         float: right;
         position: relative;
         margin-top: -20px;
@@ -80,11 +80,18 @@ body {
         position: absolute;
       }
 
-      .icon-trash, .icon-restore {
+      .icon-trash, .icon-restore, .icon-info {
         float: right;
         color: #666;
         display: none;
         cursor: pointer;
+        margin-left: 5px;
+      }
+      
+      &:hover {
+        .icon-info {
+          display: block;
+        }
       }
 
       &.done {
@@ -92,7 +99,6 @@ body {
         .text {
           text-decoration: line-through;
         }
-
       }
 
       &.removed {

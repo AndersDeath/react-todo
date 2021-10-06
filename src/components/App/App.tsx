@@ -4,6 +4,7 @@ import './App.scss';
 import { IItem, ItemState, STATUS_REMOVED } from '../../interfaces';
 import { ItemsList } from '../ItemsList/ItemsList';
 import { useSelector } from 'react-redux';
+import { ItemInfoPopup } from '../ItemInfoPopup/ItemInfoPopup';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       <ItemsList
         items={removedItems}
       />
+      <ItemInfoPopup />
     </div>
   );
 }

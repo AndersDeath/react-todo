@@ -24,6 +24,105 @@ export const defaultItemData: IItem[] = [
     done: false,
     datetime: date.toISOString()
   },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  {
+    key: idGen.get(),
+    title: 'third ',
+    status: '',
+    done: false,
+    datetime: date.toISOString()
+  },
+  
 ];
 
 export function createItem(input: string): IItem {

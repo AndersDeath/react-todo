@@ -1,14 +1,16 @@
-import { faCheckSquare, faSquare, faTrash, faTrashRestore } from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare, faInfoCircle, faSquare, faTrash, faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { IItem, STATUS_REMOVED, STATUS_RESTORED } from "../../interfaces";
 import { updateItemAction } from "../../store/actionCreators";
+import { ItemInfoPopup } from "../ItemInfoPopup/ItemInfoPopup";
 import { ItemsListBtn } from "../ItemsListBtn/ItemsListBtn";
 
 
 export function ItemsListItem(props: any) {
 
+    const [showPopup, setShowPopup] = useState(false);
     const dispatch: Dispatch<any> = useDispatch()
 
     const updateItem = useCallback(
@@ -37,6 +39,10 @@ export function ItemsListItem(props: any) {
         updateItem(props.item);
     }
 
+    function infoHandler(item: IItem) {
+        setShowPopup(true);
+    }
+
     const [input, setInput] = useState<string>(props.item.title)
 
 
@@ -61,6 +67,14 @@ export function ItemsListItem(props: any) {
       </span>
       <input disabled={isDisabled} type="text" className="text-input" value={input} onChange={inputOnChange}/>
       <div className="button-area">
+         <ItemsListBtn
+          className="icon-info"
+          handler={() => {
+            infoHandler(props.item);
+          }}
+          item={props.item}
+          fontAwesomIconLink={faInfoCircle}
+        />
         <ItemsListBtn
           className="icon-trash"
           handler={() => {
@@ -77,6 +91,13 @@ export function ItemsListItem(props: any) {
           item={props.item}
           fontAwesomIconLink={faTrashRestore}
         />
+
       </div>
+      <ItemInfoPopup
+      item={props.item}
+      closeHandler={() =>{
+          setShowPopup(false)
+      }}
+      show={showPopup}/>
     </div>)
 }
