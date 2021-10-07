@@ -1,6 +1,6 @@
 import { faCheckSquare, faInfoCircle, faSquare, faTrash, faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Dispatch, useCallback, useEffect, useState } from "react";
+import { Dispatch, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IItem, STATUS_REMOVED, STATUS_RESTORED } from "../../interfaces";
 import { updateItemAction } from "../../store/actionCreators";
@@ -8,9 +8,10 @@ import { getItem } from "../../store/selectors";
 import { ItemInfoPopup } from "../ItemInfoPopup/ItemInfoPopup";
 import { ItemsListBtn } from "../ItemsListBtn/ItemsListBtn";
 
-
 export function ItemsListItem(props: any) {
     const item: any = useSelector(getItem(props.item.key));
+    const [val, setVal] = useState(item.title);
+
     const [showPopup, setShowPopup] = useState(false);
     const dispatch: Dispatch<any> = useDispatch()
 
@@ -18,7 +19,7 @@ export function ItemsListItem(props: any) {
       (item: IItem) => dispatch(updateItemAction(item)),
       [dispatch]
     )
-    
+
     function toggleDoneHandler(item: IItem) {
       item.done = !item.done;
       updateItem(item);
@@ -36,6 +37,7 @@ export function ItemsListItem(props: any) {
 
     function inputOnChange(val: React.ChangeEvent<HTMLInputElement>) {
         item.title = val.target.value;
+        setVal(val.target.value);
         updateItem(item);
     }
 
@@ -62,7 +64,7 @@ export function ItemsListItem(props: any) {
     }}>
         <FontAwesomeIcon icon={icon} />
       </span>
-      <input disabled={isDisabled} type="text" className="text-input" value={item.title} onChange={inputOnChange}/>
+      <input disabled={isDisabled} type="text" className="text-input" value={val} onChange={inputOnChange}/>
       <div className="button-area">
          <ItemsListBtn
           className="icon-info"
@@ -92,8 +94,9 @@ export function ItemsListItem(props: any) {
       </div>
       <ItemInfoPopup
       item={item}
-      closeHandler={() =>{
-          setShowPopup(false);  
+      closeHandler={(item: string) =>{
+          setShowPopup(false);
+          setVal(item);
       }}
       show={showPopup}/>
     </div>)

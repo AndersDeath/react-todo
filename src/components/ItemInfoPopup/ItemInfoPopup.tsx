@@ -48,7 +48,7 @@ export function ItemInfoPopup(props: any) {
                 </div>
                 <div className="item-info-popup__bottom">
                     <button onClick={() => {
-                            props.closeHandler()
+                            props.closeHandler(item.title)
                         }}>
                         <FontAwesomeIcon icon={faTimesCircle} />
                         Close
