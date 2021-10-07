@@ -8,16 +8,25 @@ import './ItemInfoPopup.scss';
 
 export function ItemInfoPopup(props: any) {
 
-    const [input, setInput] = useState(props.item.title);
+    const [title, setTitle] = useState(props.item.title);
+    const [body, setBody] = useState(props.item.body);
+
     const dispatch: Dispatch<any> = useDispatch()
 
     const updateItem = useCallback(
       (item: IItem) => dispatch(updateItemAction(item)),
       [dispatch]
     )
-    function inputOnChange(val: React.ChangeEvent<HTMLInputElement>) {
-        setInput(val.target.value);
+
+    function titleOnChange(val: React.ChangeEvent<HTMLInputElement>) {
+        setTitle(val.target.value);
         props.item.title = val.target.value;
+        updateItem(props.item);
+    }
+
+    function bodyOnChange(val: React.ChangeEvent<HTMLTextAreaElement>) {
+        setBody(val.target.value);
+        props.item.body = val.target.value;
         updateItem(props.item);
     }
 
@@ -28,12 +37,22 @@ export function ItemInfoPopup(props: any) {
             <div className="item-info-popup__container">
                 <div className="item-info-popup__header">
                     <span className="icon icon-close">
-                        <FontAwesomeIcon onClick={() => {
-                            props.closeHandler()
-                        }} icon={faTimesCircle} />
+                        
                     </span>
                 </div>
-                <input type="text" className="text-input" value={input} onChange={inputOnChange}/>
+                <div className="item-info-popup__body">
+                    <input type="text" className="text-input-popup" value={title} onChange={titleOnChange}/>
+                    <textarea defaultValue={body} onChange={bodyOnChange}>
+                    </textarea>
+                </div>
+                <div className="item-info-popup__bottom">
+                    <button onClick={() => {
+                            props.closeHandler()
+                        }}>
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
     </div>;

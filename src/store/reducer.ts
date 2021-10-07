@@ -20,6 +20,7 @@ const reducer = (
         title: action.item.title,
         status: '',
         done: false,
+        body: action.item.body || '',
         datetime: date.toISOString()
       }
       return {

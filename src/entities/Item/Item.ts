@@ -8,6 +8,7 @@ export const defaultItemData: IItem[] = [
     title: 'first',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -15,6 +16,7 @@ export const defaultItemData: IItem[] = [
     title: 'second',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -22,6 +24,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -29,6 +32,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -36,6 +40,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -43,6 +48,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -50,6 +56,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -57,6 +64,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -64,6 +72,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -71,6 +80,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -78,6 +88,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -85,6 +96,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -92,6 +104,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -99,6 +112,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -106,6 +120,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -113,6 +128,7 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   {
@@ -120,18 +136,20 @@ export const defaultItemData: IItem[] = [
     title: 'third ',
     status: '',
     done: false,
+    body: '',
     datetime: date.toISOString()
   },
   
 ];
 
-export function createItem(input: string): IItem {
+export function createItem(input: string, body?: string): IItem {
     const date = new Date();
     return {
         key: idGen.get(),
         title: input,
         status: '',
         done: false,
+        body: body || '',
         datetime: date.toISOString()
       }
 }

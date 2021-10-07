@@ -9,6 +9,7 @@ export interface IItem {
   title: string;
   status: string;
   done: boolean;
+  body: string;
   datetime: string;
 }
 
