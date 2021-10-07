@@ -25,7 +25,8 @@ export function ListAddPopup(props: any) {
                 <div className="item-info-popup__bottom">
                     <div className="btn-area">
                         <button className="btn" onClick={() => {
-                                props.closeHandler(val)
+                                props.closeHandler(val);
+                                setVal('')
                             }}>
                             Create list
                         </button>

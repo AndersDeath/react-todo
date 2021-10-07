@@ -13,13 +13,33 @@ export interface IItem {
   datetime: string;
 }
 
+export interface IList {
+  key: number;
+  title: string;
+  status: string;
+  comment: string;
+  datetime: string;
+  items: IItem[];
+}
+
 export type ItemAction = {
   type: string
   item: IItem
+}
+
+export type ListAction = {
+  type: string
+  list: IList
 }
 
 export type ItemState = {
   items: IItem[]
 }
 
+export type MainState = {
+  lists: IList[]
+}
+
 export type DispatchType = (args: ItemAction) => ItemAction
+
+export type DispatchType2 = (args: ListAction) => ListAction
