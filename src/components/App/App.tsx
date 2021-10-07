@@ -7,9 +7,7 @@ import { useSelector } from 'react-redux';
 import { getItems } from '../../store/selectors';
 
 function App() {
-
-  const items: readonly IItem[] = useSelector(getItems);
-
+  const items: IItem[] = useSelector(getItems);
   const activeItems: IItem[] = [];
   const removedItems: IItem[] = [];
 
