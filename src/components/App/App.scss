@@ -16,6 +16,11 @@ body {
   background-color: rgba(0,0,0,0.7);
   width: 60%;
 
+  .btn {
+    padding: 10px;
+    border: 1px solid #666;
+    font-size: 18px;
+  }
 
   .icon {
     color: #666;
@@ -68,7 +73,7 @@ body {
       .icon-close {
         float: right;
         position: relative !important;
-        font-size: 24px;
+        font-size: 18px;
         margin: -18px;
         color: #333;
         border-radius: 32px;

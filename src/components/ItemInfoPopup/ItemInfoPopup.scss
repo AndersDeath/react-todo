@@ -15,15 +15,35 @@
         width: 100%;
     }
     &__container {
-        margin: 70px auto;
+        margin: 20vh auto;
         padding: 20px;
         background: #fff;
         width: 50%;
         position: relative;
+        z-index: 999;
+    }
+
+    &__bottom {
+        padding: 15px 0 0 0;
+        overflow: hidden;
+        .btn-area {
+            float: right;
+        }
     }
 
     .text-input-popup {
         width: 100%;
+        font-size: 18px;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+
+    .text-input-textarea {
+        box-sizing: border-box;
+        padding: 5px;
+        width: 100%;
+        min-height: 200px;
+        font-size: 18px;
 
     }
 }

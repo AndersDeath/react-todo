@@ -1,5 +1,3 @@
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Dispatch, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IItem } from '../../interfaces';
@@ -43,16 +41,20 @@ export function ItemInfoPopup(props: any) {
                 </div>
                 <div className="item-info-popup__body">
                     <input type="text" className="text-input-popup" defaultValue={item.title} onChange={titleOnChange}/>
-                    <textarea defaultValue={item.body} onChange={bodyOnChange}>
+                    <textarea className="text-input-textarea" defaultValue={item.body} onChange={bodyOnChange}>
                     </textarea>
+                    Date: {item.datetime} <br/>
+                    Done:  {item.done.toString()} <br/>
+                    Status:  {item.status.toString()} <br/>
                 </div>
                 <div className="item-info-popup__bottom">
-                    <button onClick={() => {
-                            props.closeHandler(item.title)
-                        }}>
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                        Close
-                    </button>
+                    <div className="btn-area">
+                        <button className="btn" onClick={() => {
+                                props.closeHandler(item.title)
+                            }}>
+                            Close
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
