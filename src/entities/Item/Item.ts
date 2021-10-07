@@ -1,10 +1,10 @@
 import { IItem } from "../../interfaces";
-import { idGen } from "../../services/IdGen/IdGen";
+import { itemIdGen } from "../../services/IdGen/IdGen";
 
 let date = new Date();
 export const defaultItemData: IItem[] = [
   {
-    key: idGen.get(),
+    key: itemIdGen.get(),
     title: 'first',
     status: '',
     done: false,
@@ -12,7 +12,7 @@ export const defaultItemData: IItem[] = [
     datetime: date.toISOString()
   },
   {
-    key: idGen.get(),
+    key: itemIdGen.get(),
     title: 'second',
     status: '',
     done: false,
@@ -20,7 +20,7 @@ export const defaultItemData: IItem[] = [
     datetime: date.toISOString()
   },
   {
-    key: idGen.get(),
+    key: itemIdGen.get(),
     title: 'third ',
     status: '',
     done: false,
@@ -33,7 +33,7 @@ export const defaultItemData: IItem[] = [
 export function createItem(input: string, body?: string): IItem {
     const date = new Date();
     return {
-        key: idGen.get(),
+        key: itemIdGen.get(),
         title: input,
         status: '',
         done: false,

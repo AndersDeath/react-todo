@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes"
-import { idGen } from "../services/IdGen/IdGen";
+import { itemIdGen } from "../services/IdGen/IdGen";
 import { IItem, ItemAction, ItemState } from "../interfaces";
 import { defaultItemData } from "../entities/Item";
 
@@ -16,7 +16,7 @@ const reducer = (
   switch (action.type) {
     case actionTypes.ADD_ITEM:
       const newItem: IItem = {
-        key: idGen.get(),
+        key: itemIdGen.get(),
         title: action.item.title,
         status: '',
         done: false,

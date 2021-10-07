@@ -12,6 +12,7 @@ export class IdGenClass {
 
 }
 
-const idGen = new IdGenClass();
+const listIdGen = new IdGenClass();
+const itemIdGen = new IdGenClass();
 
-export { idGen };
+export { listIdGen, itemIdGen };
