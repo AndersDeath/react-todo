@@ -1,18 +1,15 @@
 
 import { AddInput } from '../AddInput/AddInput'
 import './App.scss';
-import { IItem, ItemState, STATUS_REMOVED } from '../../interfaces';
+import { IItem, STATUS_REMOVED } from '../../interfaces';
 import { ItemsList } from '../ItemsList/ItemsList';
-import { shallowEqual, useSelector } from 'react-redux';
-// import { ItemInfoPopup } from '../ItemInfoPopup/ItemInfoPopup';
-// import { idGen } from '../../services/IdGen/IdGen';
+import { useSelector } from 'react-redux';
+import { getItems } from '../../store/selectors';
 
 function App() {
 
-  const items: readonly IItem[] = useSelector(
-    (state: ItemState) => state.items,
-    shallowEqual
-  )
+  const items: readonly IItem[] = useSelector(getItems);
+
   const activeItems: IItem[] = [];
   const removedItems: IItem[] = [];
 
@@ -23,7 +20,6 @@ function App() {
       removedItems.push(item);
     }
   });
-  // let date = new Date();
 
   return (
     <div className="containter">
@@ -34,15 +30,6 @@ function App() {
       <ItemsList
         items={removedItems}
       />
-      {/* <ItemInfoPopup show={true} item={
-        {
-          key: idGen.get(),
-          title: 'first',
-          status: '',
-          done: false,
-          datetime: date.toISOString()
-        }
-      }/> */}
     </div>
   );
 }
