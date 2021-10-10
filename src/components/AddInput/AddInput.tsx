@@ -4,7 +4,7 @@ import React, { Dispatch, KeyboardEvent, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createItem } from "../../entities/Item";
 import { IItem } from "../../interfaces";
-import { addItemAction } from "../../store/actionCreators";
+// import { addItemAction } from "../../store/actionCreators";
 
 export function AddInput() {
     const [input, setInput] = useState<string>('')
@@ -15,21 +15,21 @@ export function AddInput() {
 
     function onKeyDownHandler(event: KeyboardEvent) {
         if (event.code === 'Enter') {
-            addItem(createItem(input));
+            // addItem(createItem(input));
             setInput('')
         }
     }
 
     const dispatch: Dispatch<any> = useDispatch()
 
-    const addItem = useCallback(
-      (item: IItem) => dispatch(addItemAction(item)),
-      [dispatch]
-    )
+    // const addItem = useCallback(
+    //   (item: IItem) => dispatch(addItemAction(item)),
+    //   [dispatch]
+    // )
 
     return <div className="input">
         <button onClick={() => {
-            addItem(createItem(input));
+            // addItem(createItem(input));
             setInput('')
         }}>
             <FontAwesomeIcon icon={faPlusCircle} />

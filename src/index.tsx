@@ -4,15 +4,15 @@ import './index.scss';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware, Store } from "redux"
-import { DispatchType, ItemAction, ItemState } from './interfaces';
+import { DispatchType, DispatchType2, ItemAction, ItemState, ListAction, MainState } from './interfaces';
 
 import thunk from "redux-thunk"
 import { Provider } from 'react-redux'
 import reducer from "./store/reducer"
 
 
-const store: Store<ItemState, ItemAction> & {
-  dispatch: DispatchType
+const store: Store<MainState, ListAction> & {
+  dispatch: DispatchType2
 } = createStore(reducer, applyMiddleware(thunk))
 
 

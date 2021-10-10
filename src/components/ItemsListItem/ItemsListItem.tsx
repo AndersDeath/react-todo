@@ -3,42 +3,42 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IItem, STATUS_REMOVED, STATUS_RESTORED } from "../../interfaces";
-import { updateItemAction } from "../../store/actionCreators";
+// import { updateItemAction } from "../../store/actionCreators";
 import { getItem } from "../../store/selectors";
 import { ItemInfoPopup } from "../ItemInfoPopup/ItemInfoPopup";
 import { ItemsListBtn } from "../ItemsListBtn/ItemsListBtn";
 
 export function ItemsListItem(props: any) {
-    const item: any = useSelector(getItem(props.item.key));
+    const item: any = useSelector(getItem(props.item.key, props.listId));
     const [val, setVal] = useState(item.title);
 
     const [showPopup, setShowPopup] = useState(false);
-    const dispatch: Dispatch<any> = useDispatch()
+    // const dispatch: Dispatch<any> = useDispatch()
 
-    const updateItem = useCallback(
-      (item: IItem) => dispatch(updateItemAction(item)),
-      [dispatch]
-    )
+    // const updateItem = useCallback(
+    //   (item: IItem) => dispatch(updateItemAction(item)),
+    //   [dispatch]
+    // )
 
     function toggleDoneHandler(item: IItem) {
       item.done = !item.done;
-      updateItem(item);
+      // updateItem(item);
     }
   
     function removeHandler(item: IItem) {
       item.status = STATUS_REMOVED;
-      updateItem(item);
+      // updateItem(item);
     }
   
     function restoreHandler(item: IItem) {
       item.status = STATUS_RESTORED;
-      updateItem(item);
+      // updateItem(item);
     }
 
     function inputOnChange(val: React.ChangeEvent<HTMLInputElement>) {
         item.title = val.target.value;
         setVal(val.target.value);
-        updateItem(item);
+        // updateItem(item);
     }
 
     function infoHandler() {
@@ -94,6 +94,7 @@ export function ItemsListItem(props: any) {
       </div>
       <ItemInfoPopup
       item={item}
+      listId={props.listId}
       closeHandler={(item: string) =>{
           setShowPopup(false);
           setVal(item);

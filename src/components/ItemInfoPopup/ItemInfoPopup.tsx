@@ -1,32 +1,32 @@
 import { Dispatch, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IItem } from '../../interfaces';
-import { updateItemAction } from '../../store/actionCreators';
+// import { updateItemAction } from '../../store/actionCreators';
 import { getItem } from '../../store/selectors';
 import './ItemInfoPopup.scss';
 
 export function ItemInfoPopup(props: any) {
 
-    const el: any = useSelector(getItem(props.item.key));
+    const el: any = useSelector(getItem(props.item.key, props.listId));
     const [item, setItem] = useState(el);
   
-    const dispatch: Dispatch<any> = useDispatch()
+    // const dispatch: Dispatch<any> = useDispatch()
 
-    const updateItem = useCallback(
-      (item: IItem) => dispatch(updateItemAction(item)),
-      [dispatch]
-    )
+    // const updateItem = useCallback(
+    //   (item: IItem) => dispatch(updateItemAction(item)),
+    //   [dispatch]
+    // )
 
     function titleOnChange(val: React.ChangeEvent<HTMLInputElement>) {
         item.title = val.target.value;
         setItem(item);
-        updateItem(item);
+        // updateItem(item);
     }
 
     function bodyOnChange(val: React.ChangeEvent<HTMLTextAreaElement>) {
         item.body = val.target.value;
         setItem(item);
-        updateItem(item);
+        // updateItem(item);
     }
 
     let fragment = <></>;

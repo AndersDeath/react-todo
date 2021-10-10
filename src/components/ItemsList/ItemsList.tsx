@@ -6,7 +6,7 @@ export function ItemsList(props: any) {
   return (<div className="list">
     {
       props.items.map((item: IItem) => {
-        return <ItemsListItem key={item.key} item={item} />
+        return <ItemsListItem key={item.key} item={item} listId={props.listId}/>
       })
     }
   </div>);
