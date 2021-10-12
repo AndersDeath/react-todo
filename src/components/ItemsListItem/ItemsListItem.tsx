@@ -2,44 +2,45 @@ import { faCheckSquare, faInfoCircle, faSquare, faTrash, faTrashRestore } from "
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IItem, STATUS_REMOVED, STATUS_RESTORED } from "../../interfaces";
-// import { updateItemAction } from "../../store/actionCreators";
+import { updateItemIntoList } from "../../entities/List";
+import { IItem, IList, STATUS_REMOVED, STATUS_RESTORED } from "../../interfaces";
+import { updateItemIntoListAction } from "../../store/actionCreators";
 import { getItem } from "../../store/selectors";
 import { ItemInfoPopup } from "../ItemInfoPopup/ItemInfoPopup";
 import { ItemsListBtn } from "../ItemsListBtn/ItemsListBtn";
 
 export function ItemsListItem(props: any) {
-    const item: any = useSelector(getItem(props.item.key, props.listId));
+    const item: any = useSelector(getItem(props.item.key, props.list.key));
     const [val, setVal] = useState(item.title);
 
     const [showPopup, setShowPopup] = useState(false);
-    // const dispatch: Dispatch<any> = useDispatch()
+    const dispatch: Dispatch<any> = useDispatch()
 
-    // const updateItem = useCallback(
-    //   (item: IItem) => dispatch(updateItemAction(item)),
-    //   [dispatch]
-    // )
+    const updateItem = useCallback(
+      (list: IList) => dispatch(updateItemIntoListAction(list)),
+      [dispatch]
+    )
 
     function toggleDoneHandler(item: IItem) {
       item.done = !item.done;
-      // updateItem(item);
+      updateItem(updateItemIntoList(props.list, item));
     }
   
     function removeHandler(item: IItem) {
       item.status = STATUS_REMOVED;
-      // updateItem(item);
+      updateItem(updateItemIntoList(props.list, item));
     }
   
     function restoreHandler(item: IItem) {
       item.status = STATUS_RESTORED;
-      // updateItem(item);
+      updateItem(updateItemIntoList(props.list, item));
     }
 
     function inputOnChange(val: React.ChangeEvent<HTMLInputElement>) {
         item.title = val.target.value;
         setVal(val.target.value);
-        // updateItem(item);
-    }
+        updateItem(updateItemIntoList(props.list, item));
+      }
 
     function infoHandler() {
         setShowPopup(true);
@@ -94,7 +95,7 @@ export function ItemsListItem(props: any) {
       </div>
       <ItemInfoPopup
       item={item}
-      listId={props.listId}
+      list={props.list}
       closeHandler={(item: string) =>{
           setShowPopup(false);
           setVal(item);

@@ -3,17 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
-import { createStore, applyMiddleware, Store } from "redux"
-import { DispatchType, DispatchType2, ItemAction, ItemState, ListAction, MainState } from './interfaces';
+import { createStore, applyMiddleware, combineReducers } from "redux"
 
 import thunk from "redux-thunk"
 import { Provider } from 'react-redux'
-import reducer from "./store/reducer"
+import { listsReducer, listIdReducer } from "./store/reducer"
 
 
-const store: Store<MainState, ListAction> & {
-  dispatch: DispatchType2
-} = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(combineReducers({lists: listsReducer, currentListId: listIdReducer}), applyMiddleware(thunk))
 
 
 ReactDOM.render(

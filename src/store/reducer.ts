@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes"
-import { itemIdGen, listIdGen } from "../services/IdGen/IdGen";
-import { IItem, IList, ItemAction, ItemState, ListAction, MainState } from "../interfaces";
+import { listIdGen } from "../services/IdGen/IdGen";
+import { CurrentListIdAction, CurrentListIdState, IList, ListAction, ListState } from "../interfaces";
 import { defaultItemData } from "../entities/Item";
 
 
@@ -14,46 +14,46 @@ let defaultListData1: IList[] = [{
   items: defaultItemData
 }]
 
-export const initialState: MainState = {
-  lists: defaultListData1
-};
 
-const reducer = (
-  state: MainState = initialState,
+const listsReducer = (
+  state: ListState = {lists: defaultListData1},
   action: ListAction
-): MainState => {
+): ListState => {
   switch (action.type) {
     case actionTypes.ADD_LIST:
       return {
         ...state,
         lists: state.lists.concat(action.list)
       }
-    // case actionTypes.ADD_ITEM:
-    //   const newItem: IItem = {
-    //     key: itemIdGen.get(),
-    //     title: action.item.title,
-    //     status: '',
-    //     done: false,
-    //     body: action.item.body || '',
-    //     datetime: date.toISOString()
-    //   }
-    //   return {
-    //     ...state,
-    //     items: state.items.concat(newItem),
-    //   }
-    // case actionTypes.UPDATE_ITEM:
-    //   const updatedItems: IItem[] = state.items.map((e:IItem) => {
-    //     if (action.item.key === e.key) {
-    //       e = action.item
-    //     };
-    //     return e;
-    //   });
-    //   return {
-    //     ...state,
-    //     items: updatedItems,
-    //   }
+    case actionTypes.UPDATE_LIST:
+      const updatedLists: IList[] = state.lists.map((e:IList) => {
+        if (action.list.key === e.key) {
+          e = action.list
+        };
+        return e;
+      });
+      return {
+        ...state,
+        lists: updatedLists,
+      }
   }
   return state
 }
 
-export default reducer
+const listIdReducer = (
+  state: CurrentListIdState = { currentListId: 1},
+  action: CurrentListIdAction
+): CurrentListIdState => {
+  switch (action.type) {
+    case actionTypes.SET_CURRENT_LIST_ID:
+      return {
+        ...state,
+        currentListId: action.listId
+      }
+
+  }
+  return state
+}
+
+
+export { listsReducer, listIdReducer}

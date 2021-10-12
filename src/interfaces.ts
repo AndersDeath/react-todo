@@ -28,8 +28,12 @@ export type ItemAction = {
 }
 
 export type ListAction = {
-  type: string
-  list: IList
+  type: string;
+  list: IList;
+}
+export type CurrentListIdAction = {
+  type: string;
+  listId: number;
 }
 
 export type ItemState = {
@@ -37,8 +41,16 @@ export type ItemState = {
 }
 
 export type MainState = {
-  lists: IList[]
+  lists: ListState
+  currentListId: CurrentListIdState;
 }
+
+export type ListState = {lists:IList[]};
+
+export type CurrentListIdState = {
+  currentListId: number;
+};
+
 
 export type DispatchType = (args: ItemAction) => ItemAction
 

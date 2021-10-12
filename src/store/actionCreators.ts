@@ -1,4 +1,4 @@
-import { DispatchType, DispatchType2, IItem, IList, ItemAction, ListAction } from "../interfaces"
+import { CurrentListIdAction, DispatchType2, IList, ListAction } from "../interfaces"
 import * as actionTypes from "./actionTypes"
 
 
@@ -11,30 +11,33 @@ export function addListAction(list: IList) {
   return simulateHttpRequest(action)
 }
 
-// export function addItemAction(item: IItem) {
-//   const action: ItemAction = {
-//     type: actionTypes.ADD_ITEM,
-//     item,
-//   }
+export function addItemToListAction(list: IList) {
+  const action: ListAction = {
+    type: actionTypes.UPDATE_LIST,
+    list,
+  }
 
-//   return simulateHttpRequest(action)
-// }
+  return simulateHttpRequest(action)
+}
 
-// export function removeItemAction(item: IItem) {
-//   const action: ItemAction = {
-//     type: actionTypes.REMOVE_ITEM,
-//     item,
-//   }
-//   return simulateHttpRequest(action)
-// }
+export function updateItemIntoListAction(list: IList) {
+  const action: ListAction = {
+      type: actionTypes.UPDATE_LIST,
+      list,
+  }
+  return simulateHttpRequest(action)
+}
 
-// export function updateItemAction(item: IItem) {
-//     const action: ItemAction = {
-//         type: actionTypes.UPDATE_ITEM,
-//         item,
-//     }
-//     return simulateHttpRequest(action)
-// }
+export function setCurrentListIdAction(listId: number) {
+  const action: CurrentListIdAction = {
+    type: actionTypes.SET_CURRENT_LIST_ID,
+    listId,
+  }
+
+  return (dispatch: any) => {
+    dispatch(action)
+  }
+}
 
 export function simulateHttpRequest(action: ListAction) {
   return (dispatch: DispatchType2) => {
